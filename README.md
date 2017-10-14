@@ -8,7 +8,7 @@ Chrome is a tool for downloading legitimate extensions of the Chrome Web Store a
   
   ### Demo
   This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called Alert Password on Google Chrome Web Store.
-
+  
   ### Installation
   
 ```
