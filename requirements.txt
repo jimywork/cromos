@@ -1,5 +1,1 @@
-pyfiglet
-shutil
-zipfile
-struct
 requests

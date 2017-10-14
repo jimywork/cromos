@@ -1,2 +1,2 @@
-git rm --cached .pyc
+git rm libs/*.pyc
 libs/*.pyc

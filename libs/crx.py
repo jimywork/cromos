@@ -9,7 +9,7 @@ import struct
 import erros
 import shutil
 
-class CRX :
+class Cromos :
 
 	def __init__(self, extension) :
 
@@ -96,8 +96,8 @@ class CRX :
 		# Tratando alguns erros
 
 		error = erros.Errors(self.extension)
-		error.removefolders()	
-		error.removekeys()
+		error.folders()	
+		error.keys()
 
 		shutil.rmtree("output/extensions/tmp")
 		

