@@ -7,9 +7,7 @@ Chrome is a tool for downloading legitimate extensions of the Chrome Web Store a
   - Upload on google drive
   
   ### Demo
-<<<<<<< HEAD
   This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called Alert Password on Google Chrome Web Store.
-=======
   This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called Alert Password on Google Chrome Web Store.
 
   ### Installation
@@ -45,4 +43,3 @@ optional arguments:
   --key KEY             API key for uploading files in Google Drive
   
  ```
->>>>>>> 06243b31377d6dfa87bbb193712f15bda2026e46
