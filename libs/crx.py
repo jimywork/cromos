@@ -17,11 +17,11 @@ class CRX :
 		
 		
 
-	def Download(self, extension) :
+	def download(self) :
 
 		try:
 
-			crx = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&x=id%3D{}%26installsource%3Dondemand%26uc".format(extension) # URL to extract the CRX
+			crx = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&x=id%3D{}%26installsource%3Dondemand%26uc".format(self.extension) # URL to extract the CRX
 			request = requests.get(crx, headers={'user-agent': 'Googlebot/2.1 (+http://www.googlebot.com/bot.html)'}, stream=True, timeout=5) # Send the Request
 			status = request.raise_for_status() # Request status code
 
@@ -29,12 +29,12 @@ class CRX :
 				os.mkdir("output/extensions/tmp")
 
 			chunksize = 16 * 1024
-			extension = "{}{}".format(extension, ".crx")
+			extension = "{}{}".format(self.extension, ".crx")
 
-			with open(os.path.join("output/extensions/tmp", extension), 'wb') as f:
+			with open(os.path.join("output/extensions/tmp", self.extension), 'wb') as f:
 				for chunk in request.iter_content(chunk_size=chunksize) :
 					f.write(chunk)
-			print("Download completed!".format(extension))		
+			# print("Download completed!".format(self.extension))		
 		except requests.exceptions.Timeout as e:
 		    # Timeout
 		    print("{} Timout Error, try again! problably the extension is big for the default timeout chrome webstore allow 100MB".format(request.status_code))
@@ -43,18 +43,18 @@ class CRX :
 		    print("{} Error, try again! problably the extension doesn't exists".format(request.status_code))
 		    sys.exit(1)
 
-	def Unpack(self, extension)	 :
+	def unpack(self)	 :
 
 		try:
 
-			crxextension = "{}{}".format(extension, ".crx")
+			crxextension = "{}{}".format(self.extension, ".crx")
 	
 
-			with open(os.path.join("output/extensions/tmp", crxextension), 'rb') as f :
+			with open(os.path.join("output/extensions/tmp", self.extension), 'rb') as f :
 
 				magic = f.read(4)
 				if magic != "Cr24":
-					print("The file {} is corrupted".format(extension))
+					print("The file {} is corrupted".format(self.extension))
 
 				version = f.read(4)
 				version, = struct.unpack("<I", version)
@@ -67,7 +67,7 @@ class CRX :
 
 				f.seek(public_key_length + signature_key_length, os.SEEK_CUR)
 
-				outzip = "{}{}".format(extension, ".zip")
+				outzip = "{}{}".format(self.extension, ".zip")
 
 				with open(os.path.join("output/extensions/tmp", outzip), 'wb') as ezip :
 					while 1:
@@ -77,15 +77,15 @@ class CRX :
 							break
 						ezip.write(buff)
 				ezip.close()
-				print("Unpack completed!".format(extension))
+				# print("Unpack completed!".format(self.extension))
 		except Exception as e:
 			raise e
 
-	def Extract(self, extension) :
+	def extract(self) :
 
 
-		zipile = "output/extensions/tmp/{}{}".format(extension, ".zip")
-		extracted = "output/extensions/%s" % (extension)
+		zipile = "output/extensions/tmp/{}{}".format(self.extension, ".zip")
+		extracted = "output/extensions/%s" % (self.extension)
 
 		# Extraindo o arquivo .crx 
 		
@@ -95,20 +95,20 @@ class CRX :
 
 		# Tratando alguns erros
 
-		error = erros.Errors(extension)
-		error.removeFolders(extension)	
-		error.removeKeys(extension)
+		error = erros.Errors(self.extension)
+		error.removefolders()	
+		error.removekeys()
 
 		shutil.rmtree("output/extensions/tmp")
 		
-		print("Extract completed!".format(extension))
+		# print("Extract completed!".format(self.extension))
 
 
-	def Valid(self, extension) :
+	def valid(self) :
 
 		pattern = r"[a-z]{32}"
 
-		matches = re.search(pattern, extension)
+		matches = re.search(pattern, self.extension)
 
 		if matches:
 			return True

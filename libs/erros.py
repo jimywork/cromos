@@ -11,20 +11,20 @@ class Errors :
 		self.extension = extension
 
 	
-	def removeFolders(self, extension) :
+	def removefolders(self) :
 
-		metadata = "{}/_metadata".format(extension)
+		metadata = "output/extensions/{}/_metadata".format(self.extension) # Error
 		folders = [metadata] # Array com as pastas que deveram ser retiradas
 
 		for folder in folders :
 			if os.path.exists(folder) and os.path.isdir(folder):
 				shutil.rmtree(folder)
 
-	def removeKeys(self, extension) :
+	def removekeys(self) :
 
 		try:
 
-			minefest = "{}/manifest.json".format(extension)
+			minefest = "output/extensions/{}/manifest.json".format(self.extension)
 			keys = ["update_url"] # Array com as keys que deveram ser retiradas
 
 			with open(minefest, 'rb') as f :

