@@ -1,2 +1,4 @@
 git rm libs/*.pyc
 libs/*.pyc
+output
+output/

