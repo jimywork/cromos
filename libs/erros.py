@@ -1,4 +1,3 @@
-#!/usr/bin/python
 
 import os
 import shutil
@@ -28,10 +27,10 @@ class Errors :
 
 		try:
 
-			minefest = "output/extensions/{}/manifest.json".format(self.extension)
+			path = "output/extensions/{}/manifest.json".format(self.extension)
 			keys = ["update_url"] # Array with folders that should be removed
 
-			with open(minefest, 'rb') as f :
+			with open(path, 'rb') as f :
 				manifest = json.load(f)
 
 				for key in keys :
@@ -39,7 +38,7 @@ class Errors :
 
 						manifest.pop(key, None)
 
-						with open(minefest, 'wb') as w :
+						with open(path, 'wb') as w :
 							w.write(json.dumps(manifest, indent=2, sort_keys=True, separators=(',', ': '), ensure_ascii=False)) 
 							w.close()
 			f.close()

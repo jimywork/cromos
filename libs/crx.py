@@ -8,14 +8,16 @@ import zipfile
 import struct
 import erros
 import shutil
+from libs.colors import Colors
 
 class Cromos :
+
+	global color
+	color = Colors()
 
 	def __init__(self, extension) :
 
 		self.extension = extension
-		
-		
 
 	def download(self) :
 
@@ -31,10 +33,16 @@ class Cromos :
 			chunksize = 16 * 1024
 			extension = "{}{}".format(self.extension, ".crx")
 
-			with open(os.path.join("output/extensions/tmp", self.extension), 'wb') as f:
-				for chunk in request.iter_content(chunk_size=chunksize) :
-					f.write(chunk)
-			# print("Download completed!".format(self.extension))		
+			pattern = r"[a-z]{32}"
+
+			matches = re.search(pattern, self.extension)
+
+			if matches:
+					with open(os.path.join("output/extensions/tmp", self.extension), 'wb') as f:
+						for chunk in request.iter_content(chunk_size=chunksize) :
+							f.write(chunk)
+					print(color.status("[+] Download the CRX {}".format(self.extension)))			
+
 		except requests.exceptions.Timeout as e:
 		    # Timeout
 		    print("{} Timout Error, try again! problably the extension is big for the default timeout chrome webstore allow 100MB".format(request.status_code))
@@ -43,7 +51,7 @@ class Cromos :
 		    print("{} Error, try again! problably the extension doesn't exists".format(request.status_code))
 		    sys.exit(1)
 
-	def unpack(self)	 :
+	def unpack(self) :
 
 		try:
 
@@ -76,8 +84,9 @@ class Cromos :
 						if not buff:
 							break
 						ezip.write(buff)
+
 				ezip.close()
-				# print("Unpack completed!".format(self.extension))
+				print(color.fails("[!] Unpack file in output/tmp/{}".format(self.extension)))
 		except Exception as e:
 			raise e
 
@@ -101,14 +110,4 @@ class Cromos :
 
 		shutil.rmtree("output/extensions/tmp")
 		
-		# print("Extract completed!".format(self.extension))
-
-
-	def valid(self) :
-
-		pattern = r"[a-z]{32}"
-
-		matches = re.search(pattern, self.extension)
-
-		if matches:
-			return True
+		print(color.fails("[!] Extension directory output/extension/{}".format(self.extension)))

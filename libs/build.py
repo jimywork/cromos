@@ -1,4 +1,3 @@
-#!/usr/bin/python
 
 import os
 
@@ -8,7 +7,7 @@ class Build :
 		self.extension = extension
 		self.filetype = filetype
 
-	def Builder(self) :
+	def builder(self) :
 
 		path = "output/builds/" # Builds files
 
