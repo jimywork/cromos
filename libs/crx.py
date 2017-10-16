@@ -19,8 +19,6 @@ class Cromos :
 
 		self.extension = extension
 
-	def download(self) :
-
 		try:
 
 			crx = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&x=id%3D{}%26installsource%3Dondemand%26uc".format(self.extension) # URL to extract the CRX
@@ -51,12 +49,7 @@ class Cromos :
 		    print("{} Error, try again! problably the extension doesn't exists".format(request.status_code))
 		    sys.exit(1)
 
-	def unpack(self) :
-
 		try:
-
-			crxextension = "{}{}".format(self.extension, ".crx")
-	
 
 			with open(os.path.join("output/extensions/tmp", self.extension), 'rb') as f :
 
@@ -88,19 +81,19 @@ class Cromos :
 				ezip.close()
 				print(color.fails("[!] Unpack file in output/tmp/{}".format(self.extension)))
 		except Exception as e:
-			raise e
-
-	def extract(self) :
-
+			print(color.error("[X] Unpack file falid"))
 
 		zipile = "output/extensions/tmp/{}{}".format(self.extension, ".zip")
 		extracted = "output/extensions/%s" % (self.extension)
 
 		# Extraindo o arquivo .crx 
 		
-		with zipfile.ZipFile(zipile, "r") as extract :
-			extract.extractall(extracted)
-			extract.close()
+		try:
+			with zipfile.ZipFile(zipile, "r") as extract :
+				extract.extractall(extracted)
+				extract.close()
+		except Exception as e:
+			print(color.fails("[X] Extract file falid{}".format(self.extension)))
 
 		# Tratando alguns erros
 
@@ -111,3 +104,5 @@ class Cromos :
 		shutil.rmtree("output/extensions/tmp")
 		
 		print(color.fails("[!] Extension directory output/extension/{}".format(self.extension)))
+
+		

@@ -55,10 +55,7 @@ def main() :
 	banner()
 
 	cromos = Cromos(extension)	
-	cromos.download()
-	cromos.unpack()
-	cromos.extract()
-
+	
 if __name__== "__main__" :
 
 	main()
