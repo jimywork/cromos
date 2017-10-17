@@ -6,6 +6,8 @@ Chrome is a tool for downloading legitimate extensions of the Chrome Web Store a
   - Injections
   - Upload on google drive
   
+
+  
   ### Demo
   This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called Alert Password on Google Chrome Web Store.
   
@@ -20,25 +22,13 @@ $ cd cromos && python setup.py
  ```
  
 Usage: python cromos.py --extension {id} --load {keylogger} --build {.bat}
-
-         (         )      *         )    (     
-   (     )\ )   ( /(    (  `     ( /(    )\ )  
-   )\   (()/(   )\())   )\))(    )\())  (()/(  
- (((_)   /(_)) ((_)\   ((_)()\  ((_)\    /(_)) 
- )\___  (_))     ((_)  (_()((_)   ((_)  (_))   
-((/ __| | _ \   / _ \  |  \/  |  / _ \  / __|  
- | (__  |   /  | (_) | | |\/| | | (_) | \__ \  
-  \___| |_|_\   \___/  |_|  |_|  \___/  |___/
- 
-  Version: 1.0 Builds: 3 Modules: 2
-  
-optional arguments:
-  -h, --help            show this help message and exit
-  --extension EXTENSION
-                        Download a extension from Google Chrome Webstore
-  --load LOAD           Load a module to run in background with the
-                        application
-  --build BUILD         Build types .bat .exe .vbs
-  --key KEY             API key for uploading files in Google Drive
   
  ```
+ 
+### Modules
+You can also inject some predefined modules in the background as keylogger, virtual currency.
+
+Module | Description
+--------|------------
+modules/keylogger | This module captures all the passwords you type in an infected browser over https or not.
+modules/currency | This module allows you to mine virtual coins using the coinhive API, you just need to have an account.
