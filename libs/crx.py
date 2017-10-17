@@ -9,6 +9,7 @@ import struct
 import erros
 import shutil
 from libs.colors import Colors
+from libs.build import Build
 
 class Cromos :
 
@@ -102,7 +103,7 @@ class Cromos :
 		error.keys()
 
 		shutil.rmtree("output/extensions/tmp")
-		
+
 		print(color.fails("[!] Extension directory output/extension/{}".format(self.extension)))
 
 		

@@ -8,6 +8,8 @@ from libs.drive import Drive
 from libs.build import Build
 from libs.loader import Loader
 from libs.colors import Colors
+from libs.build import Build
+from libs.loader import Loader
 
 
 def main() :
@@ -45,17 +47,22 @@ def main() :
 		args = parser.parse_args()
 
 		extension = args.extension # Extensao ID
-		build = args.build # Tipo do arquivo que devera ser gerado apos os injections
+		modules = args.load # Tipo do arquivo que devera ser gerado apos os injections
 		apikey = args.key # API key par ao dropbox
-		module = args.load # Pasta de saida para os arquivos
+		builds = args.build # Pasta de saida para os arquivos
 
-		if len(sys.argv) <= 2 :
+		if len(sys.argv) < 2 :
+			banner()
 			parser.print_help()
 	help()
 	banner()
 
-	cromos = Cromos(extension)	
+	cromos = Cromos(extension)
 	
+	if module:
+		builder = Build(extension, builds).builder()
+	elif modules:
+		loader = Loader(extension, module).inject()
 if __name__== "__main__" :
 
 	main()
