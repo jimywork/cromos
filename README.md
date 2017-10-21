@@ -21,8 +21,7 @@ $ cd cromos && python setup.py
  ### Usage
  ```
  
-Usage: python cromos.py --extension {id} --load {keylogger} --build {.bat}
-  
+Usage: python cromos.py --extension {id} --load {keylogger/currency} --build {.bat, .vbs}
  ```
  
 ### Modules
