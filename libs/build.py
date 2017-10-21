@@ -23,7 +23,7 @@ class Build :
 			elif self.filetype == "vbs" :
 				payloads = "data/payloads/VBScript/vbs.txt" # Payload file
 
-			print(color.fails("[!] Execuable file in directory output/extension/{}".format(self.extension)))
+			print(color.status("[+] Execuable file in directory output/extension/{}".format(self.extension)))
 		
 			build = "{}.{}".format(self.extension, self.filetype) # Make .bat file
 

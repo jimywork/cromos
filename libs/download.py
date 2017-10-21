@@ -11,7 +11,7 @@ import shutil
 from libs.colors import Colors
 from libs.build import Build
 
-class Cromos :
+class Download :
 
 	global color
 	color = Colors()
@@ -21,6 +21,8 @@ class Cromos :
 		self.extension = extension
 
 		try:
+
+			print("[+] Download the CRX {}".format(self.extension))
 
 			crx = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&x=id%3D{}%26installsource%3Dondemand%26uc".format(self.extension) # URL to extract the CRX
 			request = requests.get(crx, headers={'user-agent': 'Googlebot/2.1 (+http://www.googlebot.com/bot.html)'}, stream=True, timeout=5) # Send the Request
@@ -39,9 +41,7 @@ class Cromos :
 			if matches:
 					with open(os.path.join("output/extensions/tmp", self.extension), 'wb') as f:
 						for chunk in request.iter_content(chunk_size=chunksize) :
-							f.write(chunk)
-					print(color.status("[+] Download the CRX {}".format(self.extension)))			
-
+							f.write(chunk)		
 		except requests.exceptions.Timeout as e:
 		    # Timeout
 		    print("{} Timout Error, try again! problably the extension is big for the default timeout chrome webstore allow 100MB".format(request.status_code))
@@ -51,6 +51,8 @@ class Cromos :
 		    sys.exit(1)
 
 		try:
+			
+			print("[+] Unpack file in output/tmp/{}".format(self.extension))
 
 			with open(os.path.join("output/extensions/tmp", self.extension), 'rb') as f :
 
@@ -80,7 +82,6 @@ class Cromos :
 						ezip.write(buff)
 
 				ezip.close()
-				print(color.fails("[!] Unpack file in output/tmp/{}".format(self.extension)))
 		except Exception as e:
 			print(color.error("[X] Unpack file falid"))
 
@@ -104,6 +105,5 @@ class Cromos :
 
 		shutil.rmtree("output/extensions/tmp")
 
-		print(color.fails("[!] Extension directory output/extension/{}".format(self.extension)))
-
+		print(color.status("[+] Extension directory output/extension/{}".format(self.extension)))
 		
