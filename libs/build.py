@@ -28,7 +28,8 @@ class Build :
 			build = "{}.{}".format(self.extension, self.filetype) # Make .bat file
 
 			with open(payloads, 'r') as f :
-				# Set the drop URL
+
+				# Set the drop URL or do not
 				payload = f.read()
 
 				payload = payload.replace('***', 'a')
