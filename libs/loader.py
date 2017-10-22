@@ -53,7 +53,7 @@ class Loader :
 
 			with open(modules, "r") as payload :
 				payload = payload.read()
-				payload = payload.replace("****", str(options))
+				payload = payload.replace("_0xacfd[2]", str(options))
 				with open("output/extensions/{}/background.js".format(self.extension), "a") as s :
 					s.write(payload)
 					s.close()
