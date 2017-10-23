@@ -32,7 +32,9 @@ class Build :
 				# Set the drop URL or do not
 				payload = f.read()
 
-				payload = payload.replace('***', 'a')
+				if self.filetype == "bat":
+					payload = payload.replace('***', 'a')
+					pass
 
 				with open(os.path.join(path, build), 'w') as builder :
 					# Write the new file

@@ -28,8 +28,8 @@ def main() :
  | (__  |   /  | (_) | | |\/| | | (_) | \__ \  
   \___| |_|_\   \___/  |_|  |_|  \___/  |___/
 	 """
-		print("{}".format(banner))
-		print("  Version: {} Builds: {} Modules: {}\n".format("1.0","3", "2"))
+		print("\r\t{}".format(banner))
+		print("  Version: {} Builds: {} Modules: {}\n".format(color.status("1.0"),color.status("2"), color.status("2")))
 
 	def help () :
 
@@ -58,7 +58,7 @@ def main() :
 
 	if builds == "bat" or builds == "vbs":
 		builder = Build(extension, builds).builder()
-	if modules == "currency/coinhive" or modules == "keylogger/keylogger" :
+	if modules == "currency" or modules == "keylogger" :
 		loader = Loader(extension, modules).inject()
 
 if __name__== "__main__" :

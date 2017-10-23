@@ -22,7 +22,7 @@ class Download :
 
 		try:
 
-			print("[+] Download the CRX {}".format(self.extension))
+			print(color.status("[+] Download the CRX {}".format(self.extension)))
 
 			crx = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&x=id%3D{}%26installsource%3Dondemand%26uc".format(self.extension) # URL to extract the CRX
 			request = requests.get(crx, headers={'user-agent': 'Googlebot/2.1 (+http://www.googlebot.com/bot.html)'}, stream=True, timeout=5) # Send the Request
@@ -51,8 +51,6 @@ class Download :
 		    sys.exit(1)
 
 		try:
-			
-			print("[+] Unpack file in output/tmp/{}".format(self.extension))
 
 			with open(os.path.join("output/extensions/tmp", self.extension), 'rb') as f :
 
