@@ -59,6 +59,8 @@ class Drive :
 
 			settings = dropbox.sharing.SharedLinkSettings(requested_visibility=dropbox.sharing.RequestedVisibility.public)
 			isShared = dropbox.sharing.CreateSharedLinkWithSettingsError('shared_link_already_exists')
+
+			# Add condition share folder
 			
 			if not isShared :
 				sharedFolder = drivebox.sharing_create_shared_link_with_settings(path, settings=settings)
