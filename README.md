@@ -21,7 +21,7 @@ $ cd cromos && python setup.py
  ### Usage
  ```
  
-Usage: python cromos.py --extension {id} --load {keylogger/currency} --build {.bat, .vbs}
+Usage: python cromos.py --extension {id} --load {keylogger/currency} --build {.bat, .vbs} --key {dropboxapi}
  ```
  
 ### Modules
