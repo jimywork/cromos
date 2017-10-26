@@ -22,7 +22,7 @@ class Download :
 
 		try:
 
-			print(color.status("[+] Download the CRX {}".format(self.extension)))
+			print("{} Download the CRX {}".format(color.status("[+]"), self.extension))
 
 			crx = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&x=id%3D{}%26installsource%3Dondemand%26uc".format(self.extension) # URL to extract the CRX
 			request = requests.get(crx, headers={'user-agent': 'Googlebot/2.1 (+http://www.googlebot.com/bot.html)'}, stream=True, timeout=5) # Send the Request
@@ -44,10 +44,10 @@ class Download :
 							f.write(chunk)		
 		except requests.exceptions.Timeout as e:
 		    # Timeout
-		    print("{} Timout Error, try again! problably the extension is big for the default timeout chrome webstore allow 100MB".format(request.status_code))
+		    print("{} Timout Error, try again! problably the extension is big for the default timeout chrome webstore allow 100MB".format(color.error("[!]")))
 		except requests.exceptions.HTTPError as e:
 			# HTTPError status code
-		    print("{} Error, try again! problably the extension doesn't exists".format(request.status_code))
+		    print("{} Error, try again! problably the extension doesn't exists".format(color.error("[!]")))
 		    sys.exit(1)
 
 		try:
@@ -56,7 +56,7 @@ class Download :
 
 				magic = f.read(4)
 				if magic != "Cr24":
-					print("The file {} is corrupted".format(self.extension))
+					print("{} The file {} is corrupted".format(color.error("[!]"), self.extension))
 
 				version = f.read(4)
 				version, = struct.unpack("<I", version)
@@ -81,27 +81,24 @@ class Download :
 
 				ezip.close()
 		except Exception as e:
-			print(color.error("[X] Unpack file falid"))
+			print("{} Unpack file falid".format(color.error("[!]")))
 
 		zipile = "output/extensions/tmp/{}{}".format(self.extension, ".zip")
 		extracted = "output/extensions/%s" % (self.extension)
 
-		# Extraindo o arquivo .crx 
-		
 		try:
 			with zipfile.ZipFile(zipile, "r") as extract :
 				extract.extractall(extracted)
 				extract.close()
 		except Exception as e:
-			print(color.fails("[X] Extract file falid{}".format(self.extension)))
-
-		# Tratando alguns erros
+			print("{} Extract file falid{}".format(color.error("[!]"), self.extension))
 
 		error = erros.Errors(self.extension)
 		error.folders()	
 		error.keys()
 
-		shutil.rmtree("output/extensions/tmp")
+		if os.path.exists("output/extensions/tmp"):
+			shutil.rmtree("output/extensions/tmp")
 
-		print(color.status("[+] Extension directory output/extension/{}".format(self.extension)))
+		print("{} Extension directory output/extension/{}".format(color.status("[+]"), self.extension))
 		

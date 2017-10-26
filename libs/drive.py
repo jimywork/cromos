@@ -56,19 +56,6 @@ class Drive :
 					return None
 		print('{} Upload completed files as been upload on https://www.dropbox.com/home{}'.format(self.color.status("[+]"), "{}/{}{}".format(path, self.extension, ".zip")))
 		
-		try:
-
-			settings = dropbox.sharing.SharedLinkSettings(requested_visibility=dropbox.sharing.RequestedVisibility.public)
-			isShared = dropbox.sharing.CreateSharedLinkWithSettingsError('shared_link_already_exists')
-
-			# Add condition share folder
-
-			if not isShared :
-				sharedFolder = drivebox.sharing_create_shared_link(path, settings=settings)
-
-		except dropbox.sharing.CreateSharedLinkWithSettingsError as e:
-			print("{} Dropbox Error {}".format("[!]", e))
-	
 	def link(self) :
 
 		drivebox = dropbox.Dropbox(self.token, timeout=30)

