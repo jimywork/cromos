@@ -7,7 +7,7 @@ class Colors :
 
 		self.green = '92m'
 		self.fail = '91m'
-		self.warning = '93m'
+		self.yellow = '93m'
 		self.purple = '37m'
 		self.blue = '96m'
 
@@ -27,8 +27,8 @@ class Colors :
 		return self.color(text, [self.green])
 	def error (self, text) :
 		return self.color(text, [self.fail])
-	def fails (self, text) :
-		return self.color(text, [self.warning])
+	def yellows (self, text) :
+		return self.color(text, [self.yellow])
 	def purpl (self, text) :
 		return self.color(text, [self.purple])
 	def blues (self, text) :

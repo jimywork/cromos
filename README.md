@@ -1,10 +1,10 @@
 # Cromos 
 
-Chrome is a tool for downloading legitimate extensions of the Chrome Web Store and inject codes in the background of the application and more chrome create executable files to force installation via powershell or vbscript for example and also upload files to google drive for host the malicious files.
+Cromos is a tool for downloading legitimate extensions of the Chrome Web Store and inject codes in the background of the application and more chrome create executable files to force installation via powershell or vbscript for example and also upload files to google drive for host the malicious files.
 
   - Download extension
   - Injections
-  - Upload on google drive
+  - Upload on dropbox
   
 
   
