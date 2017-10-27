@@ -16,7 +16,6 @@ class Build :
 		try:
 
 			path = "output/builds/" # Builds files
-
 			if self.filetype == "bat":
 				payloads = "data/payloads/powershell/powershell.txt" # Payload file
 			elif self.filetype == "vbs" :
@@ -33,7 +32,7 @@ class Build :
 
 				if self.filetype == "bat":
 					payload = payload.replace('***', Drive(self.extension, self.token).link())
-					print("{} Execuable file in directory output/extension/{}".format(self.color.status("[+]")self.extension)))
+					print("{} Execuable file in directory output/extension/{}".format(self.color.status("[+]"), self.extension))
 
 				with open(os.path.join(path, build), 'w') as builder :
 					# Write the new file

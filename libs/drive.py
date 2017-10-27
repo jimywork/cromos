@@ -54,7 +54,7 @@ class Drive :
 					f.close()
 				except dropbox.exceptions.ApiError as e:
 					return None
-		print('{} Upload completed files as been upload on https://www.dropbox.com/home{}'.format(self.color.status("[+]"), "{}/{}{}".format(path, self.extension, ".zip")))
+		print('{} The file has been uploaded on https://www.dropbox.com/home{}'.format(self.color.status("[+]"), "{}/{}{}".format(path, self.extension, ".zip")))
 		
 	def link(self) :
 
@@ -72,9 +72,9 @@ class Drive :
 					link += shared
 				except ApiError as err:
 					if err.error.is_shared_link_already_exists() :
-						print("{} Link already exists".format("[!]"))
+						print("{} Link already exists".format(self.color.error("[!]")))
 					if err.error.is_path() and err.error.get_path().is_not_found() :
-						print("{} File not found".format("[!]"))
+						print("{} File not found".format(self.color.error("[!]")))
 					elif err.error.is_settings_error():
 						print(err.error.get_settings_error())
 		return link
