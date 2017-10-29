@@ -20,7 +20,7 @@ class Drive :
 		self.extension = extension
 		self.token = token
 		self.color = Colors()
-		self.drive = dropbox.Dropbox(self.token, timeout=30)
+		self.drive = dropbox.Dropbox(self.token)
 
 	def upload(self) :
 
@@ -43,6 +43,8 @@ class Drive :
 		
 		if overwrite:
 			mode = dropbox.files.WriteMode.overwrite
+		else:
+			mode = dropbox.files.WriteMode.add
 
 		print('{} Upload file in dropbox'.format(self.color.status("[+]")))
 
@@ -52,10 +54,10 @@ class Drive :
 			with open(zipile, "rb") as f :
 				data = f.read()
 				try:
-					self.drive.files_upload(data, "{}/{}{}".format(path, self.extension, ".zip"), mode=mode, client_modified=ctime, mute=False)
-					f.close()
+					self.drive.files_upload(data, "{}/{}{}".format(path, self.extension, ".zip"), mode=mode, client_modified=ctime, mute=True)
 				except dropbox.exceptions.ApiError as e:
 					return None
+			f.close()
 		print('{} The file has been uploaded on https://www.dropbox.com/home{}'.format(self.color.status("[+]"), "{}/{}{}".format(path, self.extension, ".zip")))	
 		
 		if os.path.exists("output/extensions/tmp"):
