@@ -9,10 +9,10 @@ Cromos is a tool for downloading legitimate extensions of the Chrome Web Store a
 
   
   ### Demo
-  This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called idkloemkmldbemijiamdiolojbffnjlh on Google Chrome Web Store and injecting a mining module.
+  This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called G Suite Training on Google Chrome Web Store and injecting a mining module.
   
   
-<a href="https://asciinema.org/a/Z2TfxaHP3PKIT9Gab4Q35wVH2?autoplay=1"><img src="https://asciinema.org/a/Z2TfxaHP3PKIT9Gab4Q35wVH2.png"/></a>
+<a href="https://asciinema.org/a/2kLKxkIkxXcN7oyzVq1ywndKt?autoplay=1"><img src="https://asciinema.org/a/2kLKxkIkxXcN7oyzVq1ywndKt.png"/></a>
   
   ### Installation
   
