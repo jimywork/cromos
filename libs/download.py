@@ -13,17 +13,18 @@ from libs.build import Build
 
 class Download :
 
-	global color
-	color = Colors()
 
 	def __init__(self, extension) :
 
 		self.extension = extension
+		self.color = Colors()
+		self.path = "output/extensions/{}".format(self.extension)
 		
-		if not os.path.exists("output/extensions/{}".format(self.extension)):
+		if not os.path.exists(self.path):
+
 			try:
 
-				print("{} Download the CRX {}".format(color.status("[+]"), self.extension))
+				print("{} Downloading the extension {}".format(self.color.status("[+]"), self.extension))
 
 				crx = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&x=id%3D{}%26installsource%3Dondemand%26uc".format(self.extension) # URL to extract the CRX
 				request = requests.get(crx, headers={'user-agent': 'Googlebot/2.1 (+http://www.googlebot.com/bot.html)'}, stream=True, timeout=5) # Send the Request
@@ -101,5 +102,6 @@ class Download :
 			if os.path.exists("output/extensions/tmp"):
 				shutil.rmtree("output/extensions/tmp")
 
-			print("{} Extension directory output/extension/{}".format(color.status("[+]"), self.extension))
-		
+			print("{} Extension directory output/extension/{}".format(self.color.status("[+]"), self.extension))
+		elif os.path.exists(self.path):
+			print("{} The extension has already been downloaded".format(self.color.status("[+]")))

