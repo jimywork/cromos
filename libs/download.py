@@ -49,7 +49,7 @@ class Download :
 			    print("{} Timout Error, try again! problably the extension is big for the default timeout chrome webstore allow 100MB".format(color.error("[!]")))
 			except requests.exceptions.HTTPError as e:
 				# HTTPError status code
-			    print("{} Error, try again! problably the extension doesn't exists".format(color.error("[!]")))
+			    print("{} Error, try again! problably the extension doesn't exists".format(self.color.error("[!]")))
 			    sys.exit(1)
 
 			try:

