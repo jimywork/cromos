@@ -7,7 +7,7 @@ from libs.drive import Drive
 from libs.build import Build
 from libs.colors import Colors
 from libs.loader import Loader
-
+import os
 
 
 def main() :
@@ -68,9 +68,9 @@ def main() :
 			sys.exit(1)
 		else :
 			if builds == "bat" or builds == "vbs":
-				Drive(extension, token).upload()
-				pass
-			
+				Build(extension, builds, token).builder()
+				Drive(extension, builds, token).upload()
+	
 if __name__== "__main__" :
 
 	main()

