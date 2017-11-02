@@ -152,7 +152,7 @@ class Drive :
 			print('{} Done!'.format(self.color.status("[+]")))
 			break
 
-	def reUploadWithShareLinks(self) :
+	def ShareLinks(self) :
 
 		paths = self.drive.files_list_folder("/{}".format(self.extension))
 

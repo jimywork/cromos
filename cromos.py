@@ -57,6 +57,7 @@ def main() :
 	help()
 
 	if extension:
+		
 		download = Download(extension)
 
 	if modules == "currency" or modules == "keylogger" :

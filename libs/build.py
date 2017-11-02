@@ -56,7 +56,7 @@ class Build :
 					os.remove("output/builds/%s" % build)
 					os.remove("output/builds/%s" % powershell)
 
-				paths = Drive(self.extension, self.filetype, self.token).reUploadWithShareLinks()
+				paths = Drive(self.extension, self.filetype, self.token).ShareLinks()
 
 				# print(paths)
 
