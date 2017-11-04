@@ -71,7 +71,9 @@ def main() :
 			if builds == "bat" or builds == "vbs":
 				Build(extension, builds, token).builder()
 				Drive(extension, builds, token).upload()
-	
+	else:
+		print("{} Enter with dropbox token".format(color.error("[!]")))
+		sys.exit(1)
 if __name__== "__main__" :
 
 	main()

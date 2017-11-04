@@ -35,7 +35,7 @@ class Drive :
 		directory = "output/extensions/{}".format(self.extension)
 		zipile = "output/extensions/tmp/{}{}".format(self.extension, ".zip")
 		batch = "output/builds/{}{}".format(self.extension, ".bat")
-		powershell = "output/builds/{}{}".format("chrome", ".ps1")
+		powershell = "output/builds/{}{}".format("powershell", ".ps1")
 
 		if not os.path.exists(zipile):
 			for dirname, subdirs, files in os.walk(directory):
