@@ -5,7 +5,15 @@ Cromos is a tool for downloading legitimate extensions of the Chrome Web Store a
   - Download extension
   - Injections
   - Upload files on dropbox
+  - Windows infection
   
+### Group Policy Object (GPO) 
+Chrome allows you to add extensions using Windows
+Group Policy Object (GPO) if you need to force installation on multiple machines just follow the steps in the <a href="https://docs.google.com/document/d/1iu6I0MhyrvyS5h5re5ai8RSVO2sYx2gWI4Zk4Tp6fgc"> Chrome Deployment Guide </a> 
+then modify the original extension with few modifications you can publish your extension in the Chrome Web Store requires to pay $5.
+
+### Support
+If you chose to generate a batch file to force installation the script in powershell that will be downloaded is compatible Windows, 7, 8 10 with versions of powershell >= 3.0
 
   
   ### Demo
@@ -35,7 +43,7 @@ Usage: python cromos.py --extension {id} --load {currency/keylogger}
  ##### Build a batch file and upload the files in dropbox
  
  ```
- Usage: python cromos.py --extension {id} --load {keylogger/currency} --build {bat} --token {token}
+ Usage: python cromos.py --extension {id} --build {bat} --token {dropboxToken}
  ```
 
  
@@ -47,3 +55,10 @@ Module | Description
 --------|------------
 modules/keylogger | This module captures all the passwords you type in an infected browser over https or not.
 modules/currency | This module allows you to mine virtual coins using the coinhive API, you just need to have an account.
+
+## Donations
+* XMR: `49m12JEEC6HPCHkLMX5QL4SrDQdKwh6eb4Muu8Z9CwA9MwemhzFQ3VcgHwyuR73rC22WCymTUyep7DVrfN3GPt5JBCekPrR `
+
+## Contacts
+* fbctf@riseup.net
+* [twitter](https://www.twitter.com/fbctf)
