@@ -12,6 +12,9 @@ Chrome allows you to add extensions using Windows
 Group Policy Object (GPO) if you need to force installation on multiple machines just follow the steps in the <a href="https://docs.google.com/document/d/1iu6I0MhyrvyS5h5re5ai8RSVO2sYx2gWI4Zk4Tp6fgc"> Chrome Deployment Guide </a> 
 then modify the original extension with few modifications you can publish your extension in the Chrome Web Store requires to pay $5.
 
+### Support
+If you chose to generate a batch file to force installation the script in powershell that will be downloaded is compatible Windows, 7, 8 10 with versions of powershell >= 3.0
+
   
   ### Demo
   This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called G Suite Training on Google Chrome Web Store and injecting a mining module.
@@ -40,7 +43,7 @@ Usage: python cromos.py --extension {id} --load {currency/keylogger}
  ##### Build a batch file and upload the files in dropbox
  
  ```
- Usage: python cromos.py --extension {id} --load {keylogger/currency} --build {bat} --token {dropboxToken}
+ Usage: python cromos.py --extension {id} --build {bat} --token {dropboxToken}
  ```
 
  
