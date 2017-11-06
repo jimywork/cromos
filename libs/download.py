@@ -47,6 +47,7 @@ class Download :
 			except requests.exceptions.Timeout as e:
 			    # Timeout
 			    print("{} Timout Error, try again! problably the extension is big for the default timeout chrome webstore allow 100MB".format(color.error("[!]")))
+			    sys.exit(1)
 			except requests.exceptions.HTTPError as e:
 				# HTTPError status code
 			    print("{} Error, try again! problably the extension doesn't exists".format(self.color.error("[!]")))
@@ -83,7 +84,8 @@ class Download :
 
 					ezip.close()
 			except Exception as e:
-				print("{} Unpack file falid".format(color.error("[!]")))
+				print("{} Unpack file falid".format(self.color.error("[!]")))
+				sys.exit(1)
 
 			zipile = "output/extensions/tmp/{}{}".format(self.extension, ".zip")
 			extracted = "output/extensions/%s" % (self.extension)
@@ -93,7 +95,8 @@ class Download :
 					extract.extractall(extracted)
 					extract.close()
 			except Exception as e:
-				print("{} Extract file falid{}".format(color.error("[!]"), self.extension))
+				print("{} Extract file falid{}".format(self.color.error("[!]"), self.extension))
+				sys.exit(1)
 
 			error = erros.Errors(self.extension)
 			error.folders()	
@@ -104,4 +107,4 @@ class Download :
 
 			print("{} Extension directory output/extension/{}".format(self.color.status("[+]"), self.extension))
 		elif os.path.exists(self.path):
-			print("{} The extension has already been downloaded".format(self.color.status("[+]")))
+			print("{} The extension has already been downloaded".format(self.color.yellows("[!]")))
