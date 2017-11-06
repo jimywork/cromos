@@ -148,7 +148,8 @@ class Drive :
 				raise e
 
 			count += 1
-			print('{} Files have been saved in https://www.dropbox.com/home/{}'.format(self.color.status("[+]"), self.extension))
+			print('{} The files were hosted on https://www.dropbox.com/home/{}'.format(self.color.status("[+]"), self.extension))
+			print('{} The executable file was successfully created in /output/builds/{}.bat'.format(self.color.status("[+]"), self.extension))
 			print('{} Done!'.format(self.color.status("[+]")))
 			break
 
