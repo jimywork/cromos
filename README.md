@@ -20,7 +20,7 @@ If you chose to generate a batch file to force installation the script in powers
   This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called G Suite Training on Google Chrome Web Store and injecting a mining module.
   
   
-<a href="https://asciinema.org/a/2kLKxkIkxXcN7oyzVq1ywndKt?autoplay=1"><img src="https://asciinema.org/a/2kLKxkIkxXcN7oyzVq1ywndKt.png"/></a>
+<a href="https://asciinema.org/a/ENrke3a5kU83jC3hXIDdgWWyd?autoplay=1"><img src="https://asciinema.org/a/ENrke3a5kU83jC3hXIDdgWWyd.png"/></a>
   
   ### Installation
   
