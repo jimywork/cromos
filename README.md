@@ -56,6 +56,10 @@ Module | Description
 modules/keylogger | This module captures all the passwords you type in an infected browser over https or not.
 modules/currency | This module allows you to mine virtual coins using the coinhive API, you just need to have an account.
 
+### Disclaimer
+Code samples are provided for educational purposes. Adequate defenses can only be built by researching attack techniques available to malicious actors. Using this code against target systems without prior permission is illegal in most jurisdictions. The authors are not liable for any damages from misuse of this information or code.
+
+
 ## Donations
 * XMR: `49m12JEEC6HPCHkLMX5QL4SrDQdKwh6eb4Muu8Z9CwA9MwemhzFQ3VcgHwyuR73rC22WCymTUyep7DVrfN3GPt5JBCekPrR `
 
