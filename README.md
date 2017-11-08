@@ -17,7 +17,7 @@ If you chose to generate a batch file to force installation the script in powers
 
   
   ### Demo
-  This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called G Suite Training on Google Chrome Web Store and injecting a mining module.
+  This is a demonstration of the tool at work in this examples I'm downloading a famous Google extension called G Suite Training on Google Chrome Web Store and injecting a keylogger module.
   
   
 <a href="https://asciinema.org/a/ENrke3a5kU83jC3hXIDdgWWyd?autoplay=1"><img src="https://asciinema.org/a/ENrke3a5kU83jC3hXIDdgWWyd.png"/></a>
@@ -53,7 +53,7 @@ You can also inject some predefined modules in the background as <strong>keylogg
 
 Module | Description
 --------|------------
-modules/keylogger | This module captures all the passwords you type in an infected browser over https or not.
+modules/keylogger | This module captures all the passwords you type in an infected browser over https or not. All you need is to have a php server for example to receive the requests get the parameters are email, password, cookies and userAgent.
 modules/currency | This module allows you to mine virtual coins using the coinhive API, you just need to have an account.
 
 ### Disclaimer
