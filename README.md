@@ -62,5 +62,5 @@ Code samples are provided for educational purposes. Adequate defenses can only b
 * XMR: `49m12JEEC6HPCHkLMX5QL4SrDQdKwh6eb4Muu8Z9CwA9MwemhzFQ3VcgHwyuR73rC22WCymTUyep7DVrfN3GPt5JBCekPrR `
 
 ## Contacts
-* fbctf@riseup.net
-* [twitter](https://www.twitter.com/fbctf)
+* evilsockett@gmail.com
+* [twitter](https://www.twitter.com/evilsockett)
